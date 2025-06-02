@@ -1,5 +1,7 @@
+"use client"
 import React from 'react'
 import Image from 'next/image'
+import { motion } from 'motion/react';
 
 export const Projects = () => {
 
@@ -30,11 +32,23 @@ export const Projects = () => {
         </p>
         <div className='grid grid-cols-1 gap-4 py-4 md:grid-cols-2'>
         {projects.map((project, idx) => (
-            <div key={project.title}>
+            <motion.div 
+            initial ={{ opacity: 0, filter:"blur(10px)",y: 20 }}
+            whileInView={{ opacity: 1, filter:"blur(0px)", y: 0 }}
+            transition={{ duration: 0.3, delay: idx * 0.1, ease: "easeInOut" }}
+
+            key={project.title}
+            className='group relative'
+            >
+                <h2 className='absolute bottom-2 left-2 z-20 text-black dark:text-white'>
+
+                    {project.title}
+                </h2>
+
                <Image src= {project.src} alt={project.title}
-               height={300} width={300} className='h-72 rounded-xl object-cover w-full'
+               height={300} width={300} className='h-72 group-hover:blur-[2px] transition duration-200 rounded-xl object-cover w-full'
                />
-            </div>
+            </motion.div>
         ))}
         </div>
     </div>
