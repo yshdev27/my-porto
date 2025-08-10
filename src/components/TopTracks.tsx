@@ -60,36 +60,47 @@ export default function TopTracks() {
     );
   }
 
+  const top10 = (tracks ?? []).slice(0, 10);
+  const col1 = top10.slice(0, 5);
+  const col2 = top10.slice(5, 10);
+
+  const renderItem = (track: Track) => (
+    <li
+      key={track.id}
+      className="flex items-center gap-4 rounded-md p-2 transition-colors hover:bg-neutral-100 dark:hover:bg-neutral-800/70"
+    >
+      <img
+        src={track.albumImageUrl}
+        alt={`${track.name} album art`}
+        width={50}
+        height={50}
+        className="h-[50px] w-[50px] flex-none rounded-md object-cover shadow"
+      />
+      <div className="min-w-0">
+        <a
+          href={track.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="block truncate font-medium text-neutral-900 hover:underline dark:text-neutral-100"
+        >
+          {track.name}
+        </a>
+        <p className="truncate text-sm text-neutral-500 dark:text-neutral-400">{track.artist}</p>
+      </div>
+    </li>
+  );
+
   return (
     <section>
       <h2 className="mb-5 text-xl font-semibold tracking-tight">My Top 10 Spotify Tracks</h2>
-      <ol className="space-y-3">
-        {tracks?.map((track) => (
-          <li
-            key={track.id}
-            className="flex items-center gap-4 rounded-md p-2 transition-colors hover:bg-neutral-100 dark:hover:bg-neutral-800/70"
-          >
-            <img
-              src={track.albumImageUrl}
-              alt={`${track.name} album art`}
-              width={50}
-              height={50}
-              className="h-[50px] w-[50px] flex-none rounded-md object-cover shadow"
-            />
-            <div className="min-w-0">
-              <a
-                href={track.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="block truncate font-medium text-neutral-900 hover:underline dark:text-neutral-100"
-              >
-                {track.name}
-              </a>
-              <p className="truncate text-sm text-neutral-500 dark:text-neutral-400">{track.artist}</p>
-            </div>
-          </li>
-        ))}
-      </ol>
+      <div className="grid grid-cols-2 gap-x-6 gap-y-3">
+        <ol className="space-y-3">
+          {col1.map(renderItem)}
+        </ol>
+        <ol className="space-y-3">
+          {col2.map(renderItem)}
+        </ol>
+      </div>
     </section>
   );
 }
