@@ -9,6 +9,7 @@ const app_url = process.env.NEXT_PUBLIC_APP_URL as string;
 
 const redirect_uri = `${app_url}/api/spotify/callback`;
 
+
 export async function GET(request: NextRequest): Promise<NextResponse> {
   const code = request.nextUrl.searchParams.get('code');
 
@@ -28,6 +29,7 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
     });
 
     const { access_token, refresh_token } = response.data;
+    
     const cookieStore = await cookies();
 
     cookieStore.set('spotify_access_token', access_token, {

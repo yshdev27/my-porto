@@ -1,44 +1,17 @@
+// app/api/spotify/top-tracks/route.ts
 import { NextResponse } from 'next/server';
-import { cookies } from 'next/headers';
-import axios, { AxiosError } from 'axios';
+import { getTopTracks } from '@/lib/spotify'; // Use your correct path, e.g., ../../../lib/spotify
 
-// A basic type for the Spotify track item.
-// In a real app, you'd define this more thoroughly.
-interface SpotifyTrack {
-  id: string;
-  name: string;
-  artists: { name: string }[];
-  album: { images: { url: string }[] };
-  external_urls: { spotify: string };
-}
-
-interface SpotifyTopTracksResponse {
-  items: SpotifyTrack[];
-}
+export const dynamic = 'force-dynamic'; // This tells Next.js not to cache this route
 
 export async function GET(): Promise<NextResponse> {
-  const cookieStore = await cookies();
-  const accessToken = cookieStore.get('spotify_access_token');
-
-  if (!accessToken?.value) {
-    return NextResponse.json({ error: 'Access token missing' }, { status: 401 });
-  }
-
   try {
-    const { data } = await axios.get<SpotifyTopTracksResponse>(
-      'https://api.spotify.com/v1/me/top/tracks?limit=10', 
-      {
-        headers: { Authorization: `Bearer ${accessToken.value}` },
-      }
-    );
+    const data = await getTopTracks();
     return NextResponse.json(data);
   } catch (error) {
-    const axiosError = error as AxiosError;
     return NextResponse.json(
-      axiosError.response?.data || { error: 'An unknown error occurred' },
-      {
-        status: axiosError.response?.status || 500,
-      }
+      { error: 'Failed to fetch top tracks from Spotify.' },
+      { status: 500 }
     );
   }
 }
