@@ -23,7 +23,7 @@ A full-stack feature that connects to the Spotify API to display my real-time li
 * **Framework:** [Next.js](https://nextjs.org/)
 * **Language:** [TypeScript](https://www.typescriptlang.org/)
 * **API:** [Spotify Web API](https://developer.spotify.com/documentation/web-api/)
-* **Styling:** [Tailwind CSS](https://tailwindcss.com/) (or your preferred styling solution)
+* **Styling:** [Tailwind CSS](https://tailwindcss.com/)
 * **Deployment:** [Vercel](https://vercel.com/) / [Netlify](https://www.netlify.com/)
 
 ---
