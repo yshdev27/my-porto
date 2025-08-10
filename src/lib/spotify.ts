@@ -40,7 +40,7 @@ const getAccessToken = async () => {
 };
 
 /**
- * Fetches your top tracks from Spotify.
+ * Fetches top tracks from Spotify.
  */
 export const getTopTracks = async () => {
   const { access_token } = await getAccessToken();
@@ -53,7 +53,7 @@ export const getTopTracks = async () => {
 };
 
 /**
- * Fetches the artists you follow on Spotify.
+ * Fetches the artists I follow on Spotify.
  */
 export const getFollowedArtists = async () => {
   const { access_token } = await getAccessToken();
@@ -66,7 +66,7 @@ export const getFollowedArtists = async () => {
 };
 
 /**
- * Fetches your currently playing song from Spotify.
+ * Fetches currently playing song from Spotify.
  */
 export const getNowPlaying = async () => {
   const { access_token } = await getAccessToken();
@@ -78,11 +78,11 @@ export const getNowPlaying = async () => {
   return response.data;
 };
 
-/**
- * Pauses the currently playing track on Spotify.
- */
+
 export const pausePlayback = async () => {
   const { access_token } = await getAccessToken();
+
+  
   // The endpoint for pause is a PUT request to the main player endpoint
   const response = await axios.put(`${PLAYER_ENDPOINT}/pause`, null, {
     headers: {
