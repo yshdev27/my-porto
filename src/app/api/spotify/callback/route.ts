@@ -46,7 +46,7 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
       path: '/',
     });
 
-    // Redirect to your portfolio's homepage
+    // Redirect to portfolio's homepage
     const origin = request.nextUrl.origin;
     return NextResponse.redirect(new URL('/', origin));
 

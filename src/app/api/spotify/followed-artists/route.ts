@@ -1,15 +1,15 @@
 import { NextResponse } from 'next/server';
-import { getTopTracks } from '@/lib/spotify'; 
+import { getFollowedArtists } from '@/lib/spotify'; // Adjust path if needed
 
-export const dynamic = 'force-dynamic'; // not caching
+export const dynamic = 'force-dynamic';
 
 export async function GET(): Promise<NextResponse> {
   try {
-    const data = await getTopTracks();
+    const data = await getFollowedArtists();
     return NextResponse.json(data);
   } catch (error) {
     return NextResponse.json(
-      { error: 'Failed to fetch top tracks from Spotify.' },
+      { error: 'Failed to fetch followed artists.' },
       { status: 500 }
     );
   }

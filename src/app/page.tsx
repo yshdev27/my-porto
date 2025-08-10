@@ -1,4 +1,5 @@
 import { Container } from "@/components/container";
+import FollowedArtists from "@/components/FollowedArtists";
 import {Projects} from "@/components/projects";
 import TopTracks from "@/components/TopTracks";
 import Image from "next/image";
@@ -16,7 +17,7 @@ export default function Home(){
             I'm a software engineer and designer based in India. I turn design into experiences and ideas into code. Currently, I lead the frontend team at Yahata
         </p>
         <Projects/>
-
+        <FollowedArtists/>
          <TopTracks/>
         </Container>
        
